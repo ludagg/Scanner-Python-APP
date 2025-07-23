@@ -36,7 +36,7 @@ jobs:
         # et 'scanner.ico' par votre icône si vous en avez une
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ScannerApp
         path: dist/
