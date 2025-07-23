@@ -31,7 +31,7 @@ jobs:
 
     - name: Build with PyInstaller
       run: |
-        pyinstaller --onefile --windowed --name ScannerApp --icon=scanner.ico scanner_app.py
+        pyinstaller --onefile --windowed --name ScannerApp --icon=scan.ico scanner_app.py
         # Remplacez 'scanner_app.py' par le nom de votre fichier principal
         # et 'scanner.ico' par votre icône si vous en avez une
 
