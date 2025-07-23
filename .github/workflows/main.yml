@@ -1,0 +1,42 @@
+name: Build Windows Executable
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller pillow pyinsane2
+
+    - name: Install Tkinter (Windows)
+      run: |
+        # Tkinter est généralement inclus avec Python sur Windows
+        # Cette étape vérifie juste qu'il est disponible
+        python -c "import tkinter; print('Tkinter disponible')"
+
+    - name: Build with PyInstaller
+      run: |
+        pyinstaller --onefile --windowed --name ScannerApp --icon=scanner.ico scanner_app.py
+        # Remplacez 'scanner_app.py' par le nom de votre fichier principal
+        # et 'scanner.ico' par votre icône si vous en avez une
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ScannerApp
+        path: dist/
